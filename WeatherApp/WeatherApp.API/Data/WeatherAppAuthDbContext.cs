@@ -31,8 +31,8 @@ public class WeatherAppAuthDbContext : IdentityDbContext
             {
                 Id = writerRoleId,
                 ConcurrencyStamp = writerRoleId,
-                Name = "Writer",
-                NormalizedName = "Writer".ToUpper()
+                Name = "Changer",
+                NormalizedName = "Changer".ToUpper()
             }
         };
 

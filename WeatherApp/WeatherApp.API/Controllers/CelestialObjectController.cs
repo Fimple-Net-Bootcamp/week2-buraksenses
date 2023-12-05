@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WeatherApp.API.Custom_Attributes;
 using WeatherApp.API.Models.Domains;
@@ -23,6 +24,7 @@ public class CelestialObjectController : ControllerBase
     //GET ALL CELESTIAL OBJECTS
     //GET: /api/v1/celestialobjects
     [HttpGet]
+    [Authorize(Roles = "Reader,Changer")]
     public async Task<IActionResult> GetAll(string? filterOn = null,string? filterQuery = null, 
         string? sortBy = null,bool? isAscending = null,int pageNumber = 1,int pageSize = 1000)
     {
@@ -40,6 +42,7 @@ public class CelestialObjectController : ControllerBase
     //GET: /api/v1/celestialobjects/{id}
     [HttpGet]
     [Route("{id:guid}")]
+    [Authorize(Roles = "Reader,Changer")]
     public async Task<IActionResult> GetById(Guid id)
     {
         //Get Data From Database - Domain Models
@@ -59,6 +62,7 @@ public class CelestialObjectController : ControllerBase
     //POST: /api/v1/celestialobjects
     [HttpPost]
     [ValidateModel]
+    [Authorize(Roles = "Changer")]
     public async Task<IActionResult> Create([FromBody] CelestialObjectDto celestialObjectDto)
     {
         //Map DTO to Domain model
@@ -74,6 +78,7 @@ public class CelestialObjectController : ControllerBase
     [HttpPut]
     [Route("{id:guid}")]
     [ValidateModel]
+    [Authorize(Roles = "Changer")]
     public async Task<IActionResult> Update([FromRoute] Guid id,[FromBody] CelestialObjectDto celestialObjectDto)
     {
         //Map DTO to Domain Model
@@ -94,6 +99,7 @@ public class CelestialObjectController : ControllerBase
     //DELETE: /api/v1/celestialobjects/{id}
     [HttpDelete]
     [Route("{id:guid}")]
+    [Authorize(Roles = "Changer")]
     public async Task<IActionResult> Delete(Guid id)
     {
         var objectToDelete = await _repository.DeleteAsync(id);

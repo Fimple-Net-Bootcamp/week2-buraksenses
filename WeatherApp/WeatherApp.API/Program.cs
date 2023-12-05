@@ -56,29 +56,27 @@ builder.Services.AddDbContext<WeatherAppAuthDbContext>(options =>
 
 
 builder.Services.AddScoped<ICelestialObjectRepository, CelestialObjectRepositoryImpl>();
-// builder.Services.AddScoped<IWalkRepository, WalkRepositoryImpl>();
-// builder.Services.AddScoped<ITokenRepository, TokenRepositoryImpl>();
-// builder.Services.AddScoped<IImageRepository, ImageRepositoryImpl>();
+builder.Services.AddScoped<ITokenRepository, TokenRepositoryImpl>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
 
 //Auth
-// builder.Services.AddIdentityCore<IdentityUser>()
-//     .AddRoles<IdentityRole>()
-//     .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("NZWalks")
-//     .AddEntityFrameworkStores<NZWalksAuthDbContext>()
-//     .AddDefaultTokenProviders();
+builder.Services.AddIdentityCore<IdentityUser>()
+    .AddRoles<IdentityRole>()
+    .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("WeatherApp")
+    .AddEntityFrameworkStores<WeatherAppAuthDbContext>()
+    .AddDefaultTokenProviders();
 
-// builder.Services.Configure<IdentityOptions>(options =>
-// {
-//     options.Password.RequireDigit = false;
-//     options.Password.RequireLowercase = false;
-//     options.Password.RequireNonAlphanumeric = false;
-//     options.Password.RequireUppercase = false;
-//     options.Password.RequiredLength = 6;
-//     options.Password.RequiredUniqueChars = 1;
-// });
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 6;
+    options.Password.RequiredUniqueChars = 1;
+});
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters
@@ -103,9 +101,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//app.UseAuthentication();
+app.UseAuthentication();
 
-//app.UseAuthorization();
+app.UseAuthorization();
 
 //Image Upload
 // app.UseStaticFiles(new StaticFileOptions
