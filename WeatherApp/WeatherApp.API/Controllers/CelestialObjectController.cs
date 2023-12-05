@@ -23,10 +23,11 @@ public class CelestialObjectController : ControllerBase
     //GET ALL CELESTIAL OBJECTS
     //GET: /api/v1/celestialobjects
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll(string? filterOn = null,string? filterQuery = null, 
+        string? sortBy = null,bool? isAscending = null,int pageNumber = 1,int pageSize = 1000)
     {
         //Get Data from Database
-        var celestialObjects = await _repository.GetAllAsync();
+        var celestialObjects = await _repository.GetAllAsync(filterOn,filterQuery,sortBy,isAscending,pageNumber,pageSize);
 
         //Map Domain Models to DTOs
         var celestialObjectDto = _mapper.Map<List<CelestialObjectDto>>(celestialObjects);

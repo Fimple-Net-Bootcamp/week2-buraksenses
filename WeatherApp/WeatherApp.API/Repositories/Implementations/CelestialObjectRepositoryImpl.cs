@@ -13,9 +13,23 @@ public class CelestialObjectRepositoryImpl : ICelestialObjectRepository
         _dbContext = dbContext;
     }
     
-    public async Task<List<CelestialObject>> GetAllAsync()
+    public async Task<List<CelestialObject>> GetAllAsync(string? filterOn = null,string? filterQuery = null, string? sortBy = null,
+        bool? isAscending = null,int pageNumber = 1,int pageSize = 1000)
     {
-        return await _dbContext.CelestialObjects.ToListAsync();
+        var celestialObjects = _dbContext.CelestialObjects.AsQueryable();
+        
+        //Filtering
+        if (!string.IsNullOrWhiteSpace(filterOn) && !string.IsNullOrWhiteSpace(filterQuery))
+        {
+            if (filterOn.Equals("Name", StringComparison.OrdinalIgnoreCase))
+                celestialObjects = celestialObjects.Where(x => x.Name.Contains(filterQuery));
+            else if (filterOn.Equals("Temperature", StringComparison.OrdinalIgnoreCase))
+                celestialObjects = celestialObjects.Where(x => Math.Abs(x.TemperatureC - float.Parse(filterQuery)) < .1f);
+            else if (filterOn.Equals("Type", StringComparison.OrdinalIgnoreCase))
+                celestialObjects = celestialObjects.Where(x => x.ObjectType == filterQuery);
+        }
+        
+        return await celestialObjects.ToListAsync();
     }
 
     public async Task<CelestialObject?> GetByIdAsync(Guid id)
