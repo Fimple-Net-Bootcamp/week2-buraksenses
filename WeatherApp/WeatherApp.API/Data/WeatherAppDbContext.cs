@@ -5,7 +5,7 @@ namespace WeatherApp.API.Data;
 
 public class WeatherAppDbContext : DbContext
 {
-    public WeatherAppDbContext(DbContextOptions options) : base(options)
+    public WeatherAppDbContext(DbContextOptions<WeatherAppDbContext> options) : base(options)
     {
         
     }

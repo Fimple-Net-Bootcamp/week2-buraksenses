@@ -46,7 +46,10 @@ public class CelestialObjectRepositoryImpl : ICelestialObjectRepository
                     : celestialObjects.OrderByDescending(x => x.ObjectType);
         }
         
-        return await celestialObjects.ToListAsync();
+        //Pagination
+        var skipResults = (pageNumber - 1) * pageSize;
+        
+        return await celestialObjects.Skip(skipResults).Take(pageSize).ToListAsync();
     }
 
     public async Task<CelestialObject?> GetByIdAsync(Guid id)
