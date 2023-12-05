@@ -29,6 +29,23 @@ public class CelestialObjectRepositoryImpl : ICelestialObjectRepository
                 celestialObjects = celestialObjects.Where(x => x.ObjectType == filterQuery);
         }
         
+        //Sorting
+        if (!string.IsNullOrWhiteSpace(sortBy) && isAscending != null)
+        {
+            if (sortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
+                celestialObjects = isAscending.Value
+                    ? celestialObjects.OrderBy(x => x.Name)
+                    : celestialObjects.OrderByDescending(x => x.Name);
+            else if(sortBy.Equals("Temperature",StringComparison.OrdinalIgnoreCase))
+                celestialObjects = isAscending.Value
+                    ? celestialObjects.OrderBy(x => x.TemperatureC)
+                    : celestialObjects.OrderByDescending(x => x.TemperatureC);
+            else if(sortBy.Equals("Type",StringComparison.OrdinalIgnoreCase))
+                celestialObjects = isAscending.Value
+                    ? celestialObjects.OrderBy(x => x.ObjectType)
+                    : celestialObjects.OrderByDescending(x => x.ObjectType);
+        }
+        
         return await celestialObjects.ToListAsync();
     }
 
