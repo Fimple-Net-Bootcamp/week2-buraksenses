@@ -51,10 +51,6 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddDbContext<WeatherAppDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("WeatherAppConnectionString")));
 
-//AuthDbContext
-// builder.Services.AddDbContext<NZWalksAuthDbContext>(options =>
-//     options.UseSqlServer(builder.Configuration.GetConnectionString("NZWalksAuthConnectionString")));
-
 //
 builder.Services.AddScoped<ICelestialObjectRepository, CelestialObjectRepositoryImpl>();
 // builder.Services.AddScoped<IWalkRepository, WalkRepositoryImpl>();
