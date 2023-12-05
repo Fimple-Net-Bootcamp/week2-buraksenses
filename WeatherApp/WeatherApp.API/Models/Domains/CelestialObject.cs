@@ -1,6 +1,4 @@
-﻿using WeatherApp.API.Utils;
-
-namespace WeatherApp.API.Models.Domains;
+﻿namespace WeatherApp.API.Models.Domains;
 
 public class CelestialObject
 {
@@ -11,5 +9,5 @@ public class CelestialObject
     
     public float TemperatureF => 32 + TemperatureC / 0.5556f;
 
-    public CelestialObjectType Type { get; set; }
+    public string ObjectType { get; set; }
 }

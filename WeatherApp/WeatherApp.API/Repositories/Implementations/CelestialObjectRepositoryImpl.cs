@@ -39,7 +39,7 @@ public class CelestialObjectRepositoryImpl : ICelestialObjectRepository
 
         updatingObject.Name = celestialObject.Name;
         updatingObject.TemperatureC = celestialObject.TemperatureC;
-        updatingObject.Type = celestialObject.Type;
+        updatingObject.ObjectType = celestialObject.ObjectType;
 
         await _dbContext.SaveChangesAsync();
         return updatingObject;

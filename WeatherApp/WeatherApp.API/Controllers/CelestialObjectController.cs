@@ -22,8 +22,7 @@ public class CelestialObjectController : ControllerBase
     
     //GET ALL CELESTIAL OBJECTS
     //GET: /api/v1/celestialobjects
-    [HttpPost]
-    [ValidateModel]
+    [HttpGet]
     public async Task<IActionResult> GetAll()
     {
         //Get Data from Database
@@ -55,6 +54,20 @@ public class CelestialObjectController : ControllerBase
         return Ok(celestialObjectDto);
     }
     
+    //CREATE CELESTIAL OBJECT
+    //POST: /api/v1/celestialobjects
+    [HttpPost]
+    [ValidateModel]
+    public async Task<IActionResult> Create([FromBody] CelestialObjectDto celestialObjectDto)
+    {
+        //Map DTO to Domain model
+        var celestialObjectDomain = _mapper.Map<CelestialObject>(celestialObjectDto);
+
+        await _repository.CreateAsync(celestialObjectDomain);
+
+        return Ok(celestialObjectDto);
+    }
+
     //UPDATE CELESTIAL OBJECT
     //PUT: /api/v1/celestialobjects/{id}
     [HttpPut]
