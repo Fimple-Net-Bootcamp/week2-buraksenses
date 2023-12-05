@@ -10,7 +10,5 @@ public class WeatherAppDbContext : DbContext
         
     }
 
-    public DbSet<Satellite> Satellites { get; set; }
-
-    public DbSet<Planet> Planets { get; set; }
+    public DbSet<CelestialObject> CelestialObjects { get; set; }
 }
