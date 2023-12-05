@@ -6,6 +6,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using WeatherApp.API.Data;
+using WeatherApp.API.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,7 +59,7 @@ builder.Services.AddDbContext<WeatherAppDbContext>(options =>
 // builder.Services.AddScoped<ITokenRepository, TokenRepositoryImpl>();
 // builder.Services.AddScoped<IImageRepository, ImageRepositoryImpl>();
 
-// builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
+builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
 
 //Auth

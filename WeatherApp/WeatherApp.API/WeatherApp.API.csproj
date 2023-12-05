@@ -7,6 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="12.0.1" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.14" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.14" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
@@ -20,10 +22,7 @@
 
     <ItemGroup>
       <Folder Include="Custom Attributes\" />
-      <Folder Include="Mappings\" />
       <Folder Include="Migrations\" />
-      <Folder Include="Models\DTOs\" />
-      <Folder Include="Repositories\Implementations\" />
     </ItemGroup>
 
 </Project>
