@@ -7,6 +7,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using WeatherApp.API.Data;
 using WeatherApp.API.Mappings;
+using WeatherApp.API.Repositories;
+using WeatherApp.API.Repositories.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,7 +56,7 @@ builder.Services.AddDbContext<WeatherAppDbContext>(options =>
 //     options.UseSqlServer(builder.Configuration.GetConnectionString("NZWalksAuthConnectionString")));
 
 //
-// builder.Services.AddScoped<IRegionRepository, RegionRepositoryImpl>();
+builder.Services.AddScoped<ICelestialObjectRepository, CelestialObjectRepositoryImpl>();
 // builder.Services.AddScoped<IWalkRepository, WalkRepositoryImpl>();
 // builder.Services.AddScoped<ITokenRepository, TokenRepositoryImpl>();
 // builder.Services.AddScoped<IImageRepository, ImageRepositoryImpl>();
